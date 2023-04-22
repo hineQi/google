@@ -2,7 +2,10 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = (req, res) => {
   //let target = "https://www.google.com/";
-  const target = `http://${req.headers.host}`;
+  let target = "https://" + req.url.split("/")[1] + "/";
+  // 代理目标地址
+  // 将请求路径中的第一个参数作为目标地址的主机名
+  
   // 代理目标地址
   // 这里使用 backend 主要用于区分 vercel serverless 的 api 路径
   //   if (
@@ -22,6 +25,7 @@ module.exports = (req, res) => {
       // 通过路径重写，去除请求路径中的 `/backend`
       // 例如 /backend/user/login 将被转发到 http://backend-api.com/user/login
       //   "^/backend/": "/",
+      "^/[^/]+": "", // 将请求路径中的第一个参数替换为空字符串
     },
   })(req, res);
 };
