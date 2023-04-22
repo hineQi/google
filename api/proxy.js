@@ -27,8 +27,12 @@ module.exports = (req, res) => {
       //   "^/backend/": "/",
     },
     onProxyReq: (proxyReq, req, res) => {
-      // 将请求路径中的第一个参数去掉
-      proxyReq.path = proxyReq.path.replace(/^\/[^\/]+\//, "/");
+      // 获取请求路径
+      const path = req.path;
+      // 删除变量1
+      const newPath = path.replace(/\/[^/]+/, "");
+      // 修改请求路径
+      proxyReq.path = newPath;
     },
   })(req, res);
 };
