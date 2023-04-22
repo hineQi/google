@@ -2,7 +2,12 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = (req, res) => {
 //   let target = "https://www.google.com/";
-  let target = "https://" + req.url.split("/")[1] + "/";
+  let target = "https://www.google.com/";
+  // 代理目标地址
+  const proxyParam = req.query.proxy;
+  if (proxyParam) {
+    target = `https://${proxyParam}`;
+  }
   // 代理目标地址
   // 将请求路径中的第一个参数作为目标地址的主机名
   
@@ -24,7 +29,7 @@ module.exports = (req, res) => {
     pathRewrite: {
       // 通过路径重写，去除请求路径中的 `/backend`
       // 例如 /backend/user/login 将被转发到 http://backend-api.com/user/login
-        "^/google.com/": "/",
+//         "^/google.com/": "/",
     },
   })(req, res);
 };
