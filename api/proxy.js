@@ -1,9 +1,7 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = (req, res) => {
-//   let target = "https://www.google.com/";
-  let proxyParam = req.query.proxy;
-  let target = `https://${proxyParam}`;
+  let target = "https://www.youtube.com/";
  
   // 代理目标地址
   // 将请求路径中的第一个参数作为目标地址的主机名
