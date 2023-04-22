@@ -1,8 +1,8 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = (req, res) => {
-  //let target = "https://www.google.com/";
-  let target = "https://" + req.url.split("/")[1] + "/";
+  let target = "https://www.google.com/";
+//   let target = "https://" + req.url.split("/")[1] + "/";
   // 代理目标地址
   // 将请求路径中的第一个参数作为目标地址的主机名
   
@@ -25,7 +25,7 @@ module.exports = (req, res) => {
       // 通过路径重写，去除请求路径中的 `/backend`
       // 例如 /backend/user/login 将被转发到 http://backend-api.com/user/login
       //   "^/backend/": "/",
-      "^/[^/]+": "", // 将请求路径中的第一个参数替换为空字符串
+//       "^/[^/]+": "", // 将请求路径中的第一个参数替换为空字符串
     },
   })(req, res);
 };
