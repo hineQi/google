@@ -25,7 +25,10 @@ module.exports = (req, res) => {
       // 通过路径重写，去除请求路径中的 `/backend`
       // 例如 /backend/user/login 将被转发到 http://backend-api.com/user/login
       //   "^/backend/": "/",
-      "^/[^/]+/": "/", // 将请求路径中的第一个参数和斜杠替换为空字符串
+    },
+    onProxyReq: (proxyReq, req, res) => {
+      // 将请求路径中的第一个参数去掉
+      proxyReq.path = proxyReq.path.replace(/^\/[^\/]+\//, "/");
     },
   })(req, res);
 };
